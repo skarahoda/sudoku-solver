@@ -9,13 +9,26 @@ export default class Sudoku {
 	}
 
 	public printCells() {
-		for (let x = 0; x < 9; x++) {
-			console.log(
-				this.cells
-					.slice(x * 9, (x + 1) * 9)
-					.map(cell => cell.toString())
-					.join(' '));
+		for (let xBlocks = 0; xBlocks < 3; xBlocks++) {
+			for (let x = xBlocks; x < 9; x += 3) {
+				console.log(
+					this.tripleToString(9 * x),
+					' | ',
+					this.tripleToString(9 * x + 3),
+					' | ',
+					this.tripleToString(9 * x + 6));
+			}
+			if (xBlocks < 2) {
+				console.log('-------+---------+-------')
+			}
 		}
+	}
+
+	private tripleToString(i: number) {
+		return this.cells
+			.slice(i, i + 3)
+			.map(cell => cell.toString())
+			.join(' ')
 	}
 
 
@@ -35,15 +48,15 @@ export default class Sudoku {
 		while (i < 81) {
 			const cell = this.cells[i];
 			if (wentBack || !this.isCellSolved(cell, i)) {
-				do  {
+				do {
 					wentBack = false;
 					cell.value = (cell.value || 0) + 1;
 					if (cell.value === 10) {
 						cell.value = undefined;
 						wentBack = true;
-						i = this.findPrevSolvedIndex(i-1);
+						i = this.findPrevSolvedIndex(i - 1);
 					}
-				} while(!wentBack && (cell.value === undefined || !this.isCellValid(cell, i)))
+				} while (!wentBack && (cell.value === undefined || !this.isCellValid(cell, i)))
 			}
 			else {
 				i++;

@@ -8,6 +8,6 @@ export default class SudokuCell {
 	public toString(): string {
 		return this.isPredefined
 			? strings.blue(this.value)
-			: strings.green(String(this.value) || ' ')
+			: strings.green(this.value || '☐')
 	}
 }

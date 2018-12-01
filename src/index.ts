@@ -52,8 +52,9 @@ for (let sudokuParam of sudokuParams) {
 	let sudoku = new Sudoku(sudokuParam);
 	sudoku.solve();
 	sudoku.printCells();
-	console.log(sudoku.isValid() ? 'sudoku is solved 🎉' : 'sudoku couldn\'t solved 😞');
-	console.log()
-	console.log()
-	console.log()
+	console.log();
+	console.log(sudoku.isFull() && sudoku.isValid() ? 'sudoku is solved 🎉' : 'sudoku couldn\'t solved 😞');
+	console.log();
+	console.log();
+	console.log();
 }
